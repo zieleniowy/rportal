@@ -16,6 +16,7 @@ const globalState = (() => {
       const oldValue = keys[key];
       keys[key] = value;
       (watchers[key] || []).forEach(fn => fn(value, oldValue));
+      return oldValue;
     },
     watch: (key, watcher) => {
       if (!watchers[key]) watchers[key] = [];
@@ -30,11 +31,9 @@ const globalState = (() => {
 globalState.set('_id', 1);
 
 function Portal(props) {
-  const [id, _] = _react.default.useState(globalState.get('_id'));
+  const [id, _] = _react.default.useState(globalState.set('_id', globalState.get('_id') + 1));
 
   const [counter, setCounter] = _react.default.useState(0);
-
-  globalState.set('_id', globalState.get('_id') + 1);
 
   _react.default.useEffect(() => {
     if (props.type === 'container') {
