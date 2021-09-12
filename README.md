@@ -1,8 +1,62 @@
 # rportal
 
 is a simple React package used to render components outside default React top-down rendering hierarchy.
-With this package you can model any logical component hierarchy you want. You sipmly put 2 (or more) portals somewhere in your application
-and children from one portal will be rendered in the second portal. 
+With this package you can model any logical component hierarchy you want. You simply put 2 (or more) portals somewhere in your application
+and children from one portal will be rendered in the second portal.
+  
+  
+you can think of it as of portals in sci-fi movies. You enter portal in one place and leave it in other place. In this case you pass some react components
+into portal with type="item" (entering portal), but they will be actually rendered in other place - in portal with type="container" (exit portal) and the same id.
+
+## top-down hierarchy
+By default, you render a parent and put all its children inside (and pass props for them). Then these children can render next level of children and so on.
+That way app hierarchy looks like a tree in which all components can have multiple children but each has exactly one parent (except top most).
+```
+// tree view
+ app
+  |- child level 1
+  |   |-child level 2
+  |   |-child level 2
+  |    
+  |- child level 1
+      |-child level 2 
+         |-child level 3
+```
+
+```
+// two components - one is rendering the second twice as its children.
+const SomeChild = props => (<div>This is a child with props from a parent {JSON.stringify(props)}</div>)
+const SomeParent = props => (
+    <div>
+        <SomeChild foo="bar" />
+        <SomeChild x={3} />
+    </div>
+)
+
+```
+
+## with portal 
+you can logically nest a component in any part of a tree but actually render it in any other part of a tree.
+```
+// tree view with portal
+ app
+  |- child level 1
+  |   |-child level 2
+  |   |-child level 2
+  |      |-portal item
+  |          |-child nested in portal
+  |    
+  |- child level 1
+  |   |-child level 2 
+  |   |-child level 3
+  |
+  |-portal container
+      |- child from portal item
+```
+
+You pass a children to a portal item (and pass props for them in there), but portal item won't actually render any elements in React virtual DOM. It will
+instead pass them into a portal container, which will handle rendering.
+
 
 ## instalation
 ```
