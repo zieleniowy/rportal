@@ -36,7 +36,7 @@ const SomeParent = props => (
 ```
 
 ## with portal 
-you can logically nest a component in any part of a tree but actually render it in any other part of a tree.
+you can logically nest a component in any part of a tree (and pass its props from there) but actually render it in any other part of a tree.
 ```
 // tree view with portal
  app
@@ -69,7 +69,7 @@ yarn install rportal
 
 ## basic usage
 
-you need create a container portal with some id and item portal with children you want to render in a container.
+you need to create a container portal with some id and item portal with children you want to render in a container.
 
 
 ```
@@ -96,7 +96,8 @@ You can have multiple portals with the same id. Every component with type contai
 ## caution
 default react rendering policy makes app more readable and simpler in most cases. 
 Although using portals seems to be very comfortable, it leads app to be more complicated. 
-Every time you want to use this component, you should consider React recommended approach first.
+Every time you want to use this component, you should consider React recommended approach first. 
+If your app is complicated, at first you should think of using some state management library like redux or recoil.
 
 ## sample usecases
 - you want to render some link in menu based on current route. You create a portal container in a menu component.
