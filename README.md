@@ -4,6 +4,15 @@ is a simple React package used to render components outside default React top-do
 With this package you can model any logical component hierarchy you want. You sipmly put 2 (or more) portals somewhere in your application
 and children from one portal will be rendered in the second portal. 
 
+## instalation
+```
+npm install rportal
+
+//or
+
+yarn install rportal
+```
+
 ## basic usage
 
 you need create a container portal with some id and item portal with children you want to render in a container.
