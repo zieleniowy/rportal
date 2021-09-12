@@ -92,6 +92,9 @@ import Portal from 'rportal';
 ```
 ## multiple portals
 You can have multiple portals with the same id. Every component with type container will render all children from each portal with type item.
+  
+What's more you can pass any props to a container portal. These props will be passed to all directly children rendered in a container (but won't override props 
+passed directly to any child from inside item portal)
 
 ## caution
 default react rendering policy makes app more readable and simpler in most cases. 
