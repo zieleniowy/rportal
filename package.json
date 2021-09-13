@@ -4,7 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/zieleniowy/rportal.git",
   "author": "Mateusz Rynkowski m.rynkowski@zhr.pl",
+  "keywords": ["react", "portal", "render", "state"],
   "license": "MIT",
+  "homepage": "https://github.com/zieleniowy/rportal",
   "dependencies": {
     "react": ">= 16.0.0"
   }
