@@ -1,13 +1,16 @@
+"use strict";
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Portal;
+exports.globalStore = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const globalState = (() => {
+const globalStore = () => {
   let keys = {};
   let watchers = {};
   return {
@@ -26,8 +29,10 @@ const globalState = (() => {
       watchers[key] = [...watchers[key]].filter(_w => _w !== watcher);
     }
   };
-})();
+};
 
+exports.globalStore = globalStore;
+const globalState = globalStore();
 globalState.set('_id', 1);
 
 function Portal(props) {
