@@ -21,6 +21,7 @@ const globalStore = () => {
       (watchers[key] || []).forEach(fn => fn(value, oldValue));
       return oldValue;
     },
+    keys: () => Object.keys(keys),
     watch: (key, watcher) => {
       if (!watchers[key]) watchers[key] = [];
       watchers[key] = [...watchers[key], watcher];
