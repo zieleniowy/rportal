@@ -21,6 +21,7 @@ const globalStore = () => {
       (watchers[key] || []).forEach(fn => fn(value, oldValue));
       return oldValue;
     },
+    unset: key => delete keys[key],
     keys: () => Object.keys(keys),
     watch: (key, watcher) => {
       if (!watchers[key]) watchers[key] = [];
