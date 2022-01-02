@@ -13,19 +13,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const globalStore = () => {
   let keys = {};
   let watchers = {};
-  return {
-    get: key => keys[key],
-    set: (key, value) => {
+  const set = (key, value)=>{
       const oldValue = keys[key];
       keys[key] = value;
-      (watchers[key] || []).forEach(fn => fn(value, oldValue));
+      (watchers[key]||[]).forEach(fn=>fn(value, oldValue));
       return oldValue;
+  };
+  return {
+    get: key => keys[key],
+    set,
+    unset: key => {
+        set(key, undefined);
+        delete keys[key];
     },
-    unset: key => delete keys[key],
     keys: () => Object.keys(keys),
     watch: (key, watcher) => {
       if (!watchers[key]) watchers[key] = [];
       watchers[key] = [...watchers[key], watcher];
+      return watcher;
     },
     unwatch: (key, watcher) => {
       watchers[key] = [...watchers[key]].filter(_w => _w !== watcher);
